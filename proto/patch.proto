@@ -1,15 +1,35 @@
  /*
- * Copyright (C) 2023 Autronica Fire and Security. All rights reserved.
+ * Copyright (C) 2023 Qi.Xu
  */
  syntax = "proto3";
 
  package patch.v1;
  
+ // This option in is used to specify the Go package name that will be used when generating Go code from the protobuf file.
  option go_package = "api/proto";
  
+ message Meta {
+    // create_revision is the revision of last creation on this KV pair
+    int64 create_revision = 1;
+    // mod_revision is the revision of last modification on this KV pair
+    int64 mod_revision = 2;
+    // version is the version of the key. A deletion resets
+    int64 version = 3;
+}
+
+ message Cursor {
+    // session is the session ID attached to the request
+    bytes session = 1;
+    // meta is the metadata
+    Meta meta = 2;
+}
+
+
  message Query {
+    // path
      bytes path = 1;
      int32 limit = 2;
+
      int32 timeout = 3;
  }
  
@@ -32,13 +52,9 @@
      DELETE = 1;
  }
  
- message Meta {
-     int64 create_revision = 1;
-     int64 mod_revision = 2;
-     int64 version = 3;
- }
+
  
- message Item {
+message Item {
      Type type = 1;
      bytes key = 2;
      bytes value = 3;

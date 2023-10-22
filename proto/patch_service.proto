@@ -2,6 +2,7 @@ import "proto/patch.proto";
 
 package patch.v1;
 
+// The patch service is defined with the pull and push methods with a set of top level request and response messages.
 service Service {
     // Pull pulls the latest patch from the server.
     rpc Pull(PullRequest) returns (PullResponse) {}
