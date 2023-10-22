@@ -1,0 +1,28 @@
+/*
+ * Copyright (C) 2023 Qi Xu
+ */
+ syntax = "proto3";
+
+ package management.v1;
+ 
+ //The go_package option is specific to the Go programming language.
+ //It specifies the import path that will be used in the generated Go code
+ option go_package = "api/proto";
+ 
+ 
+ message Meta {
+     // create_revision is the revision of last creation on this KV pair
+     int64 create_revision = 1;
+     // mod_revision is the revision of last modification on this KV pair
+     int64 mod_revision = 2;
+     // version is the version of the key. A deletion resets
+     int64 version = 3;
+ }
+ 
+ message Cursor {
+     // session is the session ID attached to the request
+     bytes session = 1;
+     // meta is the metadata
+     Meta meta = 2;
+ }
+ 

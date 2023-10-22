@@ -1,0 +1,10 @@
+import "proto/patch.proto";
+
+package patch.v1;
+
+service Service {
+    // Pull pulls the latest patch from the server.
+    rpc Pull(PullRequest) returns (PullResponse) {}
+    // Push pushes the latest patch to the server.
+    rpc Push(PushRequest) returns (PushResponse) {}
+}
